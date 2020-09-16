@@ -19,5 +19,11 @@
     $compra->setPaymentMethod('paypal');
 
     $articulo = new Item();
+    $articulo->setName($producto);
+    $articulo->setCurrency('USD');
+    $articulo->setQuantity(1);
+    $articulo->setPrice($precio);
 
+    // echo $articulo->getQuantity();
+    echo $articulo->getPrice();
 ?>
