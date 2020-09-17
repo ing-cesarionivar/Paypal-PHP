@@ -1,6 +1,9 @@
 <?php
 
+    use PayPal\Api\Amount;
+    use PayPal\Api\Details;
     use PayPal\Api\Item;
+    use PayPal\Api\ItemList;
     use PayPal\Api\Payer;
 
     if(!isset($_POST['producto'], $_POST['precio'])) {
@@ -24,6 +27,16 @@
     $articulo->setQuantity(1);
     $articulo->setPrice($precio);
 
-    // echo $articulo->getQuantity();
-    echo $articulo->getPrice();
+    $listaArticulos = new ItemList();
+    $listaArticulos->setItems(array($articulo));
+
+    $detalles = new Details();
+    $detalles->setShipping($envio);
+    $detalles->setSubtotal($precio);
+
+    $cantidad = new Amount();
+    $cantidad->setCurrency('USD');
+    $cantidad->setTotal($precio);
+    $cantidad->setDetails($detalles);
+
 ?>
