@@ -5,6 +5,8 @@
     use PayPal\Api\Item;
     use PayPal\Api\ItemList;
     use PayPal\Api\Payer;
+    use PayPal\Api\RedirectUrls;
+    use PayPal\Api\Transaction;
 
     if(!isset($_POST['producto'], $_POST['precio'])) {
         exit("Hubo un error");
@@ -38,5 +40,16 @@
     $cantidad->setCurrency('USD');
     $cantidad->setTotal($precio);
     $cantidad->setDetails($detalles);
+
+    $transacion = new Transaction();
+    $transacion->setAmount($cantidad);
+    $transacion->setItemList($listaArticulos);
+    $transacion->setDescription('Pago ');
+    $transacion->setInvoiceNumber(uniqid());
+
+    $redireccionar = new RedirectUrls();
+    $redireccionar->setReturnUrl(URL_SITIO . '/pago_finalizado.php?exito=true');
+    $redireccionar->setCancelUrl(URL_SITIO . 'pago_finalizado.php?exito=false');
+
 
 ?>
