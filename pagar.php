@@ -39,13 +39,13 @@
 
     $cantidad = new Amount();
     $cantidad->setCurrency('USD');
-    $cantidad->setTotal($precio);
+    $cantidad->setTotal($total);
     $cantidad->setDetails($detalles);
 
     $transacion = new Transaction();
     $transacion->setAmount($cantidad);
     $transacion->setItemList($listaArticulos);
-    $transacion->setDescription('Pago ');
+    $transacion->setDescription('Pago');
     $transacion->setInvoiceNumber(uniqid());
 
     $redireccionar = new RedirectUrls();
